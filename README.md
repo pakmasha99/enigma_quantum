@@ -24,35 +24,10 @@ Contains the core implementation of the quantum hybrid models and training pipel
 
 *   **`QTSTransformer.py`**: Defines the model architecture classes, including the Quantum Time-Series Transformer layers and quantum circuit definitions.
 *   **`QTSTransformer_train.py`**: The main training engine. Handles data loading, site-aware stratification, training loops (training, validation, testing), and metric logging (AUC, Sensitivity, Specificity).
-*   **`QTSTransformer_tuning.py`**: A hyperparameter tuning script (likely using frameworks like Optuna) to optimize quantum circuit depth, learning rates, and transformer architecture parameters.
+*   **`QTSTransformer_tuning.py`**: A hyperparameter tuning script (using Optuna framework) to optimize quantum circuit depth, learning rates, and transformer architecture parameters.
 
 ### `papers/`
 A collection of essential literature and references relevant to this project, including:
 *   Foundational papers on Quantum Machine Learning in neuroimaging.
 *   Key studies from the ENIGMA-OCD working group.
 *   Technical references for Quantum Transformers.
-
-## Getting Started
-
-### Prerequisites
-*   Python 3.8+
-*   PyTorch
-*   PennyLane (or similar QML framework used in `QTSTransformer.py`)
-*   Scikit-learn
-*   Pandas / NumPy
-
-### Usage
-1.  **Data Preparation**: Ensure access to the ENIGMA-OCD dataset. The code expects extracted time-series (e.g., Schaefer or HCP atlas parsellated data).
-2.  **Training**: Run `QTSTransformer_tuning.py` to search for optimal hyperparameters or execute `QTSTransformer_train.py` directly for a single training run.
-
-```bash
-python code/QTSTransformer_train.py --config config.json
-```
-
-## Authors & Acknowledgments
-*   **Google DeepMind Advanced Agentic Coding Team** (Antigravity Assistant)
-*   **Principal Investigator / Researcher**: [Your Name/Lab Name]
-*   **Data Source**: ENIGMA-OCD Consortium
-
----
-*Note: This project is for research purposes only and is not intended for clinical diagnosis.*
