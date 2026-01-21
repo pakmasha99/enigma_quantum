@@ -258,7 +258,7 @@ def split_and_prepare_dataloaders(X, y, subject_ids, batch_size, sequence_length
                 f.write(f"{sub}\n")
         print(f"Splits saved to {split_output_path}")
 
-    # # Subject-wise normalization (New implementation)
+    # # Subject-wise normalization
     # def normalize_subject_wise(subjects):
     #     normalized = []
     #     for subj in subjects:
@@ -272,7 +272,7 @@ def split_and_prepare_dataloaders(X, y, subject_ids, batch_size, sequence_length
     # val_X = normalize_subject_wise(val_X)
     # test_X = normalize_subject_wise(test_X)
 
-    # Original split-level normalization (Commented out)
+    # Original split-level normalization
     # Concatenate all subjects' data along the time dimension for normalization
     train_X_concat = torch.cat(train_X, dim=0)  # shape: (total_time_points_all_subjects, num_features)
     # Compute mean/std from training set ONLY
@@ -812,11 +812,11 @@ if __name__ == "__main__":
         "input_phenotype": [],      # Use empty list to only use fMRI data
         "target": "OCD",             # CHANGE THIS to your actual target column name (e.g., diagnosis, OCD, etc.)
         "input_categorical": [],    # Keep empty if input_phenotype is empty
-        
+
         # Model Hyperparams
-        "qubits": 4,
+        "qubits": 8,
         "degree": 2,
-        "ansatz_layers": 1,
+        "ansatz_layers": 2,
         "output_dim": 1,           # 1 for Binary Classification (BCEWithLogitsLoss)
         "dropout": 0.1,
         
@@ -825,7 +825,7 @@ if __name__ == "__main__":
         "binary": True,
         "optimizer": "Adam",
         "lr": 0.001,
-        "wd": 1e-4,
+        "wd": 0.001,
         "eps": 1e-8,
         "lr_sched": "cos",
         "restart_epochs": 10,
@@ -845,7 +845,7 @@ if __name__ == "__main__":
         
     # Get the training function
     # tuning_set is a string suffix for saving files (e.g. "run1")
-    tuning_suffix = "4qubit_1layer_check2" 
+    tuning_suffix = "best_8qubit_2layers_MLPfc" 
     
     # --- Logging Setup ---
     log_dir = "/pscratch/sd/p/pakmasha/enigma_quantum/logs"

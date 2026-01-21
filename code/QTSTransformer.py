@@ -115,9 +115,21 @@ class QuantumTSTransformer(torch.nn.Module):
 
         # --- Classical Layers ---
         self.feature_projection = torch.nn.Linear(feature_dim, self.n_rots) # for each time step, convert brain ROIs into angle parameters for the main circuit
+        # # --- Alternative: MLP Feature Projection ---
+        # self.feature_projection = torch.nn.Sequential(
+        #     torch.nn.Linear(feature_dim, feature_dim * 2),
+        #     torch.nn.ReLU(),
+        #     torch.nn.Linear(feature_dim * 2, self.n_rots)
+        # )
         self.dropout = torch.nn.Dropout(dropout)    # to prevent overfitting
         self.rot_sigm = torch.nn.Sigmoid() # to ensure angle parameters are within the [0, 1] range
         self.output_ff = torch.nn.Linear(3 * n_qubits , output_dim)  # final classical classfier, predicts the target variable from the quantum measurements
+        # # --- Alternative: MLP Output Classifier ---
+        # self.output_ff = torch.nn.Sequential(
+        #     torch.nn.Linear(3 * n_qubits, 6 * n_qubits),
+        #     torch.nn.ReLU(),
+        #     torch.nn.Linear(6 * n_qubits, output_dim)
+        # )
 
         # --- Trainable Quantum Parameters ---
         self.n_poly_coeffs = self.degree + 1

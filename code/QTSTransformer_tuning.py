@@ -222,7 +222,7 @@ def main():
     
     # Run Optimization
     # n_trials can be adjusted. 30-50 is a good start for this search space.
-    study.optimize(objective, n_trials=100)
+    study.optimize(objective, n_trials=50)
     
     print("\n--- Hyperparameter Tuning Completed ---")
     
